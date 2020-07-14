@@ -4,7 +4,8 @@
 \name{mediationVC}
 \alias{mediationVC}
 \title{Williams and Anderson (1994) Mediated Multifoci Model Dataset}
-\format{A variance-covariance \code{matrix} for 232 observations and 12 variables. The variables are indicators of four constructss: 1) job satisfaction (Jobsat; 10 items), 2) organizational committment (Orgcom; 8 items), 3) leader-contingent reward behavior (Ldrrew; 10 items), and 4) job complexity (Jobcom; 6 items). The individual item responses were used to create three, total-score indicators for each construct defined as follows:
+\format{
+A variance-covariance \code{matrix} for 232 observations and 12 variables. The variables are indicators of four constructss: 1) job satisfaction (Jobsat; 10 items), 2) organizational committment (Orgcom; 8 items), 3) leader-contingent reward behavior (Ldrrew; 10 items), and 4) job complexity (Jobcom; 6 items). The individual item responses were used to create three, total-score indicators for each construct defined as follows:
 \describe{
 \item{\code{JobsatI1}}{Job satisfaction indicator 1}
 \item{\code{JobsatI2}}{Job satisfaction indicator 2}
@@ -18,7 +19,8 @@
 \item{\code{JobcomI1}}{Job complexity indicator 1}
 \item{\code{JobcomI2}}{Job complexity indicator 2}
 \item{\code{JobcomI3}}{Job complexity indicator 3}
-}}
+}
+}
 \source{
 Williams, L. J. & Anderson, S. E. (1994). An alternative approach to method effects by using latent-variable models: Applications in organizational behavior research. Journal of Applied Psychology, 79, 323-331.
 }

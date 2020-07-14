@@ -6,12 +6,11 @@
 \alias{_PACKAGE}
 \title{pathmodelfit: Fit Indices for the Path Component of Latent Variable Structural Equation Models}
 \description{
-\code{pathmodelfit} computes fit indices for 
-    evaluating the path component of latent variable structural equation models. 
-    Available fit indices include RMSEA-P and NSCI-P originally presented and evaluated 
-    by Williams and O'Boyle (2011) and demonstrated by O'Boyle and Williams (2011) and 
-    Williams, O'Boyle, & Yu (2020). Also included are fit indices described by 
-    Hancock and Mueller (2011).
+Compute fit indices for evaluating the path component of latent
+    variable structural equation models. Available fit indices include 'RMSEA-P'
+    and 'NSCI-P' originally presented and evaluated by Williams and O'Boyle (2011) 
+    and demonstrated by O'Boyle and Williams (2011) and Williams, O'Boyle, & Yu (2020). 
+    Also included are fit indices described by Hancock and Mueller (2011).
 }
 \examples{
 \dontrun{
@@ -41,6 +40,14 @@ O'Boyle, E. H., Jr., & Williams, L. J. (2011). Decomposing model fit: Measuremen
 Williams, L. J., & O’Boyle, E. H. (2011). The myth of global fit indices and alternatives for assessing latent variable relations. Organizational Research Methods, 14, 350-369.
 
 Williams, L. J., O’Boyle, E. H., & Yu, J. (2020). Condition 9 and 10 tests of model confirmation: A review of James, Mulaik, and Brett (1982) and contemporary alternatives. Organizational Research Methods, 23, 1, 6-29.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/tmsalab/pathmodelfit}
+  \item Report bugs at \url{https://github.com/tmsalab/pathmodelfit/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Steven Andrew Culpepper \email{sculpepp@illinois.edu} (\href{https://orcid.org/0000-0003-4226-6176}{ORCID})
