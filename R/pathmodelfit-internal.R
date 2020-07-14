@@ -5,7 +5,7 @@
 #' @references
 #' Hancock, G. R., & Mueller, R. O. (2011). The reliability paradox in assessing structural relations within covariance structure models. Educational and Psychological Measurement, 71(2), 306-324.
 #'
-#'McNeish, D., & Hancock, G. R. (2018). The effect of measurement quality on targeted structural model fit indices: A comment on Lance, Beck, Fan, and Carter (2016). Psychological Methods, 23(1), 184–190. https://doi.org/10.1037/met0000157
+#' McNeish, D., & Hancock, G. R. (2018). The effect of measurement quality on targeted structural model fit indices: A comment on Lance, Beck, Fan, and Carter (2016). Psychological Methods, 23(1), 184–190. https://doi.org/10.1037/met0000157
 #'
 #' O'Boyle, E. H., Jr., & Williams, L. J. (2011). Decomposing model fit: Measurement vs. theory in organizational research using latent variables. Journal of Applied Psychology, 96(1), 1–12. https://doi.org/10.1037/a0020539
 #'
@@ -17,13 +17,13 @@
 #' \dontrun{
 #' library(lavaan)
 #'
-#' model4 <- '
+#' model4 <- "
 #' Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 #' Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
 #' Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
 #' Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 #' Jobsat ~ Ldrrew + Jobcom
-#' Orgcom ~ Jobsat'
+#' Orgcom ~ Jobsat"
 #'
 #' data(mediationVC)
 #'
