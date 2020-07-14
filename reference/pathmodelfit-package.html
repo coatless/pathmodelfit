@@ -123,7 +123,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>pathmodelfit: Fit Indices for the Path Component of Latent Variable Structural Equation Models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tmsalab/pathmodelfit/blob/master/R/pathmodelfit-internal.R'><code>R/pathmodelfit-internal.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tmsalab/pathmodelfit/blob/master/R/pathmodelfit-package.R'><code>R/pathmodelfit-package.R</code></a></small>
     <div class="hidden name"><code>pathmodelfit-package.Rd</code></div>
     </div>
 
@@ -165,19 +165,19 @@
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)
 
-<span class='kw'>model4</span> <span class='op'>&lt;-</span> <span class='st'>'
+<span class='kw'>model4</span> <span class='op'>&lt;-</span> <span class='st'>"
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
 Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
 Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 Jobsat ~ Ldrrew + Jobcom
-Orgcom ~ Jobsat'</span>
+Orgcom ~ Jobsat"</span>
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
 Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
 Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 Jobsat ~ Ldrrew + Jobcom
-Orgcom ~ Jobsat'
+Orgcom ~ Jobsat"
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mediationVC</span>)
 
