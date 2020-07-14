@@ -1,0 +1,6 @@
+home:
+  strip_header: true
+
+template:
+  params:
+    ganalytics: UA-151562227-1
