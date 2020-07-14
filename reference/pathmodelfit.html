@@ -160,7 +160,8 @@ Hancock and Mueller (2011).</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
+    <p>A <code>pathmodelfit</code> object with results stored in a single row of a <code>data.frame</code>:
+RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 and SRMRs, RMSEAs, TLIs, and CFIs.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -171,8 +172,7 @@ and SRMRs, RMSEAs, TLIs, and CFIs.</p>
 <p>Williams, L. J., O’Boyle, E. H., &amp; Yu, J. (2020). Condition 9 and 10 tests of model confirmation: A review of James, Mulaik, and Brett (1982) and contemporary alternatives. Organizational Research Methods, 23, 1, 6-29.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)
-
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)</div><div class='output co'>#&gt; <span class='message'>This is lavaan 0.6-6</span></div><div class='output co'>#&gt; <span class='message'>lavaan is BETA software! Please report any bugs.</span></div><div class='input'>
 <span class='kw'>model4</span> <span class='op'>&lt;-</span> <span class='st'>"
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
@@ -188,7 +188,7 @@ Jobsat ~ Ldrrew + Jobcom
 Orgcom ~ Jobsat"
 
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mediationVC</span>, <span class='st'>"pathmodelfit"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘pathmodelfit’ not found</span></div><div class='input'>
-<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='kw'>model4</span>, sample.cov = <span class='kw'>mediationVC</span>, sample.nobs = <span class='fl'>232</span>)
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='kw'>lavaan</span>::<span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='kw'>model4</span>, sample.cov = <span class='kw'>mediationVC</span>, sample.nobs = <span class='fl'>232</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/pathmodelfit/man/pathmodelfit.html'>pathmodelfit</a></span>(<span class='kw'>fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(fit@call$model): object 'model4' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
