@@ -13,6 +13,7 @@
 #'
 #' Williams, L. J., O’Boyle, E. H., & Yu, J. (2020). Condition 9 and 10 tests of model confirmation: A review of James, Mulaik, and Brett (1982) and contemporary alternatives. Organizational Research Methods, 23, 1, 6-29.
 #'
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' library(lavaan)
@@ -31,3 +32,10 @@
 #' pathmodelfit(fit)
 #' }
 "_PACKAGE"
+
+
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+## usethis namespace: end
+NULL
