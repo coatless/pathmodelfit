@@ -101,6 +101,46 @@
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/tmsalab/pathmodelfit">"pathmodelfit"</a></span>)
 </pre></div>
+<p>From there, load the data, setup the path and obtain a lavaan model.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># Load example data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">mediationVC</span>, package = <span class="st">"pathmodelfit"</span>)
+
+<span class="co"># Define path model for lavaan</span>
+<span class="kw">model4</span> <span class="op">&lt;-</span> <span class="st">"
+Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
+Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
+Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
+Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
+Jobsat ~ Ldrrew + Jobcom
+Orgcom ~ Jobsat"</span>
+Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
+Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
+Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
+Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
+Jobsat ~ Ldrrew + Jobcom
+Orgcom ~ Jobsat"
+
+<span class="co"># Fit the pathmodel with lavaan's sem() function</span>
+<span class="kw">fit</span> <span class="op">&lt;-</span> <span class="kw">lavaan</span>::<span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html">sem</a></span>(<span class="kw">model4</span>, sample.cov = <span class="kw">mediationVC</span>, sample.nobs = <span class="fl">232</span>)
+</pre></div>
+<p>Then, the fit indices can be estimated using:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># Compute the fit indices</span>
+<span class="kw">pathmodelfit_info</span> <span class="op">=</span> <span class="fu"><a href="reference/pathmodelfit.html">pathmodelfit</a></span>(<span class="kw">fit</span>)
+
+<span class="co"># View results</span>
+<span class="kw">pathmodelfit_info</span>
+<span class="co">#&gt;                             Est</span>
+<span class="co">#&gt; RMSEA-P                 0.14685</span>
+<span class="co">#&gt; RMSEA-P 90% lower bound 0.04543</span>
+<span class="co">#&gt; RMSEA-P 90% upper bound 0.21931</span>
+<span class="co">#&gt; NSCI-P                  0.95587</span>
+<span class="co">#&gt; srmr.s                  0.05526</span>
+<span class="co">#&gt; rmsea.s                 0.17376</span>
+<span class="co">#&gt; tli.s                   0.88764</span>
+<span class="co">#&gt; cfi.s                   0.95506</span>
+</pre></div>
 </div>
 <div id="authors" class="section level2">
 <h2 class="hasAnchor">
@@ -111,7 +151,7 @@
 <h2 class="hasAnchor">
 <a href="#citing-the-pathmodelfit-package" class="anchor"></a>Citing the <code>pathmodelfit</code> package</h2>
 <p>To ensure future development of the package, please cite <code>pathmodelfit</code> package if used during an analysis or simulation study. Citation information for the package may be acquired by using in <em>R</em>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"pathmodelfit"</span>)
 </pre></div>
 </div>

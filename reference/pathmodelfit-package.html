@@ -162,9 +162,10 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://lavaan.org'>lavaan</a></span>)
+    <pre class="examples"><div class='input'><span class='co'># Load example data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mediationVC</span>, package = <span class='st'>"pathmodelfit"</span>)
 
+<span class='co'># Define path model for lavaan</span>
 <span class='kw'>model4</span> <span class='op'>&lt;-</span> <span class='st'>"
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
@@ -179,11 +180,13 @@ Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 Jobsat ~ Ldrrew + Jobcom
 Orgcom ~ Jobsat"
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>mediationVC</span>)
+<span class='co'># Fit the pathmodel with lavaan's sem() function</span>
+<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='kw'>lavaan</span>::<span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='kw'>model4</span>, sample.cov = <span class='kw'>mediationVC</span>, sample.nobs = <span class='fl'>232</span>)
 
-<span class='kw'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span>(<span class='kw'>model4</span>, sample.cov = <span class='kw'>mediationVC</span>, sample.nobs = <span class='fl'>232</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/pathmodelfit/man/pathmodelfit.html'>pathmodelfit</a></span>(<span class='kw'>fit</span>)
-}</div></pre>
+<span class='co'># Compute the fit indices with the pathmodelfit() function</span>
+<span class='kw'>pathmodelfit_info</span> <span class='op'>=</span> <span class='kw'>pathmodelfit</span>::<span class='fu'><a href='https://rdrr.io/pkg/pathmodelfit/man/pathmodelfit.html'>pathmodelfit</a></span>(<span class='kw'>fit</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(fit@call$model): object 'model4' not found</span></div><div class='input'>
+<span class='co'># View results</span>
+<span class='kw'>pathmodelfit_info</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'pathmodelfit_info' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
