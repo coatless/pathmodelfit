@@ -18,7 +18,8 @@ pathmodelfit(x, ...)
 \item{...}{Not used.}
 }
 \value{
-A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
+A \code{pathmodelfit} object with results stored in a single row of a \code{data.frame}:
+RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 and SRMRs, RMSEAs, TLIs, and CFIs.
 }
 \description{

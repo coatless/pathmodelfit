@@ -10,7 +10,8 @@
 #' @param x A [lavaan::lavaan()] or [lavaan::sem()] object.
 #' @param ... Not used.
 #' @return
-#' A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
+#' A `pathmodelfit` object with results stored in a single row of a `data.frame`:
+#' RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 #' and SRMRs, RMSEAs, TLIs, and CFIs.
 #'
 #' @export
