@@ -1,7 +1,6 @@
 # Package documentation
 
 #' @aliases pathmodelfit-package
-#' @import lavaan
 #' @references
 #' Hancock, G. R., & Mueller, R. O. (2011). The reliability paradox in assessing structural relations within covariance structure models. Educational and Psychological Measurement, 71(2), 306-324.
 #'

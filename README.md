@@ -7,7 +7,7 @@
 
 [![R build
 status](https://github.com/tmsalab/pathmodelfit/workflows/R-CMD-check/badge.svg)](https://github.com/tmsalab/pathmodelfit/actions)
-[![Package-License](http://img.shields.io/badge/license-GPL%20\(%3E=3\)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![Package-License](http://img.shields.io/badge/license-GPL%20\(%3E=2\)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 <!-- badges: end -->
 
 The goal of `pathmodelfit` is to provide fit indices for the path
@@ -54,4 +54,4 @@ citation("pathmodelfit")
 
 ## License
 
-GPL (\>= 3)
+GPL (\>= 2)

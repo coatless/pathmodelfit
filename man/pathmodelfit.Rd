@@ -42,7 +42,7 @@ Orgcom ~ Jobsat"
 
 data(mediationVC, "pathmodelfit")
 
-fit <- sem(model4, sample.cov = mediationVC, sample.nobs = 232)
+fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
 pathmodelfit(fit)
 }
 \references{

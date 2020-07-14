@@ -13,7 +13,6 @@
 #' A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 #' and SRMRs, RMSEAs, TLIs, and CFIs.
 #'
-#' @import lavaan
 #' @export
 #' @rdname pathmodelfit
 #' @references
@@ -40,7 +39,7 @@
 #'
 #' data(mediationVC, "pathmodelfit")
 #'
-#' fit <- sem(model4, sample.cov = mediationVC, sample.nobs = 232)
+#' fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
 #' pathmodelfit(fit)
 pathmodelfit <- function(x, ...) {
   UseMethod("pathmodelfit")
@@ -61,7 +60,7 @@ pathmodelfit.lavaan <- function(x, ...) {
   ptab0$est <- NULL
   ptab0$se <- NULL
   ptab0$free[structuralpaths] <- 0
-  fit0 <- sem(ptab0, sample.cov = vcdata, sample.nobs = N)
+  fit0 <- lavaan::sem(ptab0, sample.cov = vcdata, sample.nobs = N)
 
   # Saturated structural model
   eqpos <- gregexpr("\n", model)[[1]]
@@ -81,7 +80,7 @@ pathmodelfit.lavaan <- function(x, ...) {
   structural <- measurement == F & covariance == F
   modsat <- paste0(modeqs[!structural], collapse = "")
 
-  fit1 <- sem(modsat, sample.cov = vcdata, sample.nobs = N)
+  fit1 <- lavaan::sem(modsat, sample.cov = vcdata, sample.nobs = N)
 
   # Compute RMSEA-P
   X2ss <- fit1@test[[1]]$stat
@@ -125,23 +124,24 @@ pathmodelfit.lavaan <- function(x, ...) {
   labs <- c("RMSEA-P", "RMSEA-P 90% lower bound", "RMSEA-P 90% upper bound", "NSCI-P")
 
   # Compute Hancock and Mueller
-  impliedlvvcmatrix <- lavTech(fit1, what = "cov.lv")[[1]]
+  impliedlvvcmatrix <- lavaan::lavTech(fit1, what = "cov.lv")[[1]]
   latenteqs <- (fit1@ParTable$op == "=~")
   lvnames <- unique(fit1@ParTable$lhs[latenteqs])
   colnames(impliedlvvcmatrix) <- lvnames
   rownames(impliedlvvcmatrix) <- lvnames
   modlvstructure <- paste0(modeqs[structural], collapse = "")
 
-  fitwithimplied <- sem(modlvstructure, sample.cov = impliedlvvcmatrix, sample.nobs = N)
-  Hancock <- fitMeasures(fitwithimplied, fit.measures = c("srmr", "rmsea", "tli", "cfi"))
+  fitwithimplied <- lavaan::sem(modlvstructure, sample.cov = impliedlvvcmatrix, sample.nobs = N)
+  Hancock <- lavaan::fitMeasures(fitwithimplied, fit.measures = c("srmr", "rmsea", "tli", "cfi"))
   names(Hancock) <- paste0(names(Hancock), ".s")
 
   # Bind results together
   Est <- c(output, Hancock)
 
   # Create a pathmodelfit object
-  foutput <- as.data.frame(Est)
-  rownames(foutput) <- c(labs, names(Hancock))
+  foutput <- as.data.frame(t(Est))
+  colnames(foutput) <- c(labs, names(Hancock))
+  rownames(foutput) <- "Est"
   structure(foutput, class = c("pathmodelfit", "data.frame") )
 }
 
