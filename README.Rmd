@@ -42,8 +42,37 @@ remotes::install_github("tmsalab/pathmodelfit")
 
 To use `pathmodelfit`, load the package using:
 
-```{r example, eval = FALSE}
+```{r}
 library("pathmodelfit")
+```
+
+From there, load the data, setup the path and obtain a lavaan model.
+
+```{r}
+# Load example data
+data(mediationVC, package = "pathmodelfit")
+
+# Define path model for lavaan
+model4 <- "
+Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
+Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
+Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
+Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
+Jobsat ~ Ldrrew + Jobcom
+Orgcom ~ Jobsat"
+
+# Fit the pathmodel with lavaan's sem() function
+fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
+```
+
+Then, the fit indices can be estimated using:
+
+```{r}
+# Compute the fit indices
+pathmodelfit_info = pathmodelfit(fit)
+
+# View results
+pathmodelfit_info
 ```
 
 ## Authors

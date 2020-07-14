@@ -38,6 +38,44 @@ To use `pathmodelfit`, load the package using:
 library("pathmodelfit")
 ```
 
+From there, load the data, setup the path and obtain a lavaan model.
+
+``` r
+# Load example data
+data(mediationVC, package = "pathmodelfit")
+
+# Define path model for lavaan
+model4 <- "
+Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
+Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
+Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
+Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
+Jobsat ~ Ldrrew + Jobcom
+Orgcom ~ Jobsat"
+
+# Fit the pathmodel with lavaan's sem() function
+fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
+```
+
+Then, the fit indices can be estimated using:
+
+``` r
+# Compute the fit indices
+pathmodelfit_info = pathmodelfit(fit)
+
+# View results
+pathmodelfit_info
+#>                             Est
+#> RMSEA-P                 0.14685
+#> RMSEA-P 90% lower bound 0.04543
+#> RMSEA-P 90% upper bound 0.21931
+#> NSCI-P                  0.95587
+#> srmr.s                  0.05526
+#> rmsea.s                 0.17376
+#> tli.s                   0.88764
+#> cfi.s                   0.95506
+```
+
 ## Authors
 
 Steven Andrew Culpepper and Larry Williams
