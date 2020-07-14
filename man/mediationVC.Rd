@@ -5,7 +5,18 @@
 \alias{mediationVC}
 \title{Williams and Anderson (1994) Mediated Multifoci Model Dataset}
 \format{
-A variance-covariance \code{matrix} for 232 observations and 12 variables. The variables are indicators of four constructss: 1) job satisfaction (Jobsat; 10 items), 2) organizational committment (Orgcom; 8 items), 3) leader-contingent reward behavior (Ldrrew; 10 items), and 4) job complexity (Jobcom; 6 items). The individual item responses were used to create three, total-score indicators for each construct defined as follows:
+A variance-covariance \code{matrix} with 232 observations and 12 variables.
+The variables are indicators of four constructs:
+\enumerate{
+\item Job satisfaction (Jobsat; 10 items)
+\item Organizational commitment (Orgcom; 8 items)
+\item Leader-contingent reward behavior (Ldrrew; 10 items), and;
+\item Job complexity (Jobcom; 6 items).
+}
+
+The individual item responses were used to create three, total-score
+indicators for each construct defined as follows:
+
 \describe{
 \item{\code{JobsatI1}}{Job satisfaction indicator 1}
 \item{\code{JobsatI2}}{Job satisfaction indicator 2}
@@ -22,13 +33,16 @@ A variance-covariance \code{matrix} for 232 observations and 12 variables. The v
 }
 }
 \source{
-Williams, L. J. & Anderson, S. E. (1994). An alternative approach to method effects by using latent-variable models: Applications in organizational behavior research. Journal of Applied Psychology, 79, 323-331.
+Williams, L. J. & Anderson, S. E. (1994).
+An alternative approach to method effects by using latent-variable models:
+Applications in organizational behavior research. Journal of Applied Psychology, 79, 323-331.
 }
 \usage{
 mediationVC
 }
 \description{
-This data set is from Williams and Anderson (1994) on the study of methods effects in organizational research using latent-variable models.
+This data set is from Williams and Anderson (1994) on the study of methods
+effects in organizational research using latent-variable models.
 }
 \author{
 Steven Culpepper and Larry Williams
