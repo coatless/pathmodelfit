@@ -14,9 +14,10 @@
 #'
 #' @keywords internal
 #' @examples
-#' \dontrun{
-#' library(lavaan)
+#' # Load example data
+#' data(mediationVC, package = "pathmodelfit")
 #'
+#' # Define path model for lavaan
 #' model4 <- "
 #' Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 #' Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
@@ -25,11 +26,14 @@
 #' Jobsat ~ Ldrrew + Jobcom
 #' Orgcom ~ Jobsat"
 #'
-#' data(mediationVC)
+#' # Fit the pathmodel with lavaan's sem() function
+#' fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
 #'
-#' fit <- sem(model4, sample.cov = mediationVC, sample.nobs = 232)
-#' pathmodelfit(fit)
-#' }
+#' # Compute the fit indices with the pathmodelfit() function
+#' pathmodelfit_info = pathmodelfit::pathmodelfit(fit)
+#'
+#' # View results
+#' pathmodelfit_info
 "_PACKAGE"
 
 

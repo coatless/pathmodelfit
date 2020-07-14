@@ -10,7 +10,7 @@
 #' @param x A [lavaan::lavaan()] or [lavaan::sem()] object.
 #' @param ... Not used.
 #' @return
-#' A `pathmodelfit` object with results stored in a single row of a `data.frame`:
+#' A `pathmodelfit` object with results stored in a single **column** of a `data.frame`:
 #' RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 #' and SRMRs, RMSEAs, TLIs, and CFIs.
 #'
@@ -28,8 +28,10 @@
 #' Williams, L. J., O’Boyle, E. H., & Yu, J. (2020). Condition 9 and 10 tests of model confirmation: A review of James, Mulaik, and Brett (1982) and contemporary alternatives. Organizational Research Methods, 23, 1, 6-29.
 #'
 #' @examples
-#' library(lavaan)
+#' # Load example data
+#' data(mediationVC, package = "pathmodelfit")
 #'
+#' # Define path model for lavaan
 #' model4 <- "
 #' Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 #' Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
@@ -38,10 +40,14 @@
 #' Jobsat ~ Ldrrew + Jobcom
 #' Orgcom ~ Jobsat"
 #'
-#' data(mediationVC, "pathmodelfit")
-#'
+#' # Fit the pathmodel with lavaan's sem() function
 #' fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
-#' pathmodelfit(fit)
+#'
+#' # Compute the fit indices with the pathmodelfit() function
+#' pathmodelfit_info = pathmodelfit::pathmodelfit(fit)
+#'
+#' # View results
+#' pathmodelfit_info
 pathmodelfit <- function(x, ...) {
   UseMethod("pathmodelfit")
 }
@@ -140,9 +146,9 @@ pathmodelfit.lavaan <- function(x, ...) {
   Est <- c(output, Hancock)
 
   # Create a pathmodelfit object
-  foutput <- as.data.frame(t(Est))
-  colnames(foutput) <- c(labs, names(Hancock))
-  rownames(foutput) <- "Est"
+  foutput <- as.data.frame(Est)
+  rownames(foutput) <- c(labs, names(Hancock))
+  #rownames(foutput) <- "Est"
   structure(foutput, class = c("pathmodelfit", "data.frame") )
 }
 

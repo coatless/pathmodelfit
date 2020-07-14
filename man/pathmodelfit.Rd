@@ -18,7 +18,7 @@ pathmodelfit(x, ...)
 \item{...}{Not used.}
 }
 \value{
-A \code{pathmodelfit} object with results stored in a single row of a \code{data.frame}:
+A \code{pathmodelfit} object with results stored in a single \strong{column} of a \code{data.frame}:
 RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
 and SRMRs, RMSEAs, TLIs, and CFIs.
 }
@@ -31,8 +31,10 @@ O'Boyle, & Yu, (2019). Also included are fit indices described by
 Hancock and Mueller (2011).
 }
 \examples{
-library(lavaan)
+# Load example data
+data(mediationVC, package = "pathmodelfit")
 
+# Define path model for lavaan
 model4 <- "
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
@@ -41,10 +43,14 @@ Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 Jobsat ~ Ldrrew + Jobcom
 Orgcom ~ Jobsat"
 
-data(mediationVC, "pathmodelfit")
-
+# Fit the pathmodel with lavaan's sem() function
 fit <- lavaan::sem(model4, sample.cov = mediationVC, sample.nobs = 232)
-pathmodelfit(fit)
+
+# Compute the fit indices with the pathmodelfit() function
+pathmodelfit_info = pathmodelfit::pathmodelfit(fit)
+
+# View results
+pathmodelfit_info
 }
 \references{
 Hancock, G. R., & Mueller, R. O. (2011). The reliability paradox in assessing structural relations within covariance structure models. Educational and Psychological Measurement, 71(2), 306-324.
