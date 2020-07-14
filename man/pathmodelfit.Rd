@@ -2,35 +2,48 @@
 % Please edit documentation in R/pathmodelfit.R
 \name{pathmodelfit}
 \alias{pathmodelfit}
+\alias{pathmodelfit.lavaan}
+\alias{pathmodelfit.default}
 \title{Compute fit indices for the path component of latent variable structural equation models.}
 \usage{
-pathmodelfit(lavaanoutput)
+pathmodelfit(x, ...)
+
+\method{pathmodelfit}{lavaan}(x, ...)
+
+\method{pathmodelfit}{default}(x, ...)
 }
 \arguments{
-\item{lavaanoutput}{A \code{lavaan} \code{sem} object.}
+\item{x}{A \code{\link[lavaan:lavaan]{lavaan::lavaan()}} or \code{\link[lavaan:sem]{lavaan::sem()}} object.}
+
+\item{...}{Not used.}
 }
 \value{
-A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P, and SRMRs, RMSEAs, TLIs, and CFIs.
+A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
+and SRMRs, RMSEAs, TLIs, and CFIs.
 }
 \description{
-\code{pathmodelfit} computes fit indices for evaluating the path component of latent variable structural equation models. Available fit indices include RMSEA-P and NSCI-P originally presented and evaluated by Williams and O'Boyle (2011) and demonstrated by O'Boyle and Williams (2011) and Williams, O'Boyle, & Yu, (2019). Also included are fit indices described by Hancock and Mueller (2011).
+\code{pathmodelfit} computes fit indices for evaluating the path component of
+latent variable structural equation models. Available fit indices include
+RMSEA-P and NSCI-P originally presented and evaluated by Williams and
+O'Boyle (2011) and demonstrated by O'Boyle and Williams (2011) and Williams,
+O'Boyle, & Yu, (2019). Also included are fit indices described by
+Hancock and Mueller (2011).
 }
 \examples{
 library(lavaan)
 
-model4 <- '
+model4 <- "
 Ldrrew =~ LdrrewI1 + LdrrewI2 + LdrrewI3
 Jobcom =~ JobcomI1 + JobcomI2 + JobcomI3
 Jobsat =~ JobsatI1 + JobsatI2 + JobsatI3
 Orgcom =~ OrgcomI1 + OrgcomI2 + OrgcomI3
 Jobsat ~ Ldrrew + Jobcom
-Orgcom ~ Jobsat'
+Orgcom ~ Jobsat"
 
-data(mediationVC)
+data(mediationVC, "pathmodelfit")
 
 fit <- sem(model4, sample.cov = mediationVC, sample.nobs = 232)
 pathmodelfit(fit)
-
 }
 \references{
 Hancock, G. R., & Mueller, R. O. (2011). The reliability paradox in assessing structural relations within covariance structure models. Educational and Psychological Measurement, 71(2), 306-324.

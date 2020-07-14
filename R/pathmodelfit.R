@@ -1,11 +1,21 @@
 #' Compute fit indices for the path component of latent variable structural equation models.
 #'
-#' \code{pathmodelfit} computes fit indices for evaluating the path component of latent variable structural equation models. Available fit indices include RMSEA-P and NSCI-P originally presented and evaluated by Williams and O'Boyle (2011) and demonstrated by O'Boyle and Williams (2011) and Williams, O'Boyle, & Yu, (2019). Also included are fit indices described by Hancock and Mueller (2011).
+#' `pathmodelfit` computes fit indices for evaluating the path component of
+#' latent variable structural equation models. Available fit indices include
+#' RMSEA-P and NSCI-P originally presented and evaluated by Williams and
+#' O'Boyle (2011) and demonstrated by O'Boyle and Williams (2011) and Williams,
+#' O'Boyle, & Yu, (2019). Also included are fit indices described by
+#' Hancock and Mueller (2011).
 #'
-#' @param lavaanoutput A \code{lavaan} \code{sem} object.
-#' @return A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P, and SRMRs, RMSEAs, TLIs, and CFIs.
+#' @param x A [lavaan::lavaan()] or [lavaan::sem()] object.
+#' @param ... Not used.
+#' @return
+#' A vector with RMSEA-P, a 90 percent confidence interval for RMSEA-P, NSCI-P,
+#' and SRMRs, RMSEAs, TLIs, and CFIs.
+#'
 #' @import lavaan
 #' @export
+#' @rdname pathmodelfit
 #' @references
 #' Hancock, G. R., & Mueller, R. O. (2011). The reliability paradox in assessing structural relations within covariance structure models. Educational and Psychological Measurement, 71(2), 306-324.
 #'
@@ -28,17 +38,24 @@
 #' Jobsat ~ Ldrrew + Jobcom
 #' Orgcom ~ Jobsat"
 #'
-#' data(mediationVC)
+#' data(mediationVC, "pathmodelfit")
 #'
 #' fit <- sem(model4, sample.cov = mediationVC, sample.nobs = 232)
 #' pathmodelfit(fit)
-pathmodelfit <- function(lavaanoutput) {
-  # extracting data features
-  fit <- lavaanoutput
+pathmodelfit <- function(x, ...) {
+  UseMethod("pathmodelfit")
+}
+
+#' @export
+#' @rdname pathmodelfit
+pathmodelfit.lavaan <- function(x, ...) {
+  # Extracting data features
+  fit <- x
   N <- fit@loglik$ntotal
   vcdata <- eval(fit@call$sample.cov)
   model <- eval(fit@call$model)
-  # setting structural paths from fit to 0
+
+  # Setting structural paths from fit to 0
   structuralpaths <- which(fit@ParTable$op == "~")
   ptab0 <- fit@ParTable
   ptab0$est <- NULL
@@ -46,16 +63,16 @@ pathmodelfit <- function(lavaanoutput) {
   ptab0$free[structuralpaths] <- 0
   fit0 <- sem(ptab0, sample.cov = vcdata, sample.nobs = N)
 
-  # saturated structural model
+  # Saturated structural model
   eqpos <- gregexpr("\n", model)[[1]]
   neqs <- length(eqpos)
   totchars <- nchar(model)
-  eqpos <- c(eqpos[1:neqs], totchars)
+  eqpos <- c(eqpos[seq_len(neqs)], totchars)
   modeqs <- character(neqs)
   measurement <- logical(neqs)
   covariance <- logical(neqs)
 
-  for (i in 1:neqs) {
+  for (i in seq_len(neqs)) {
     tmp <- substr(model, start = eqpos[i], stop = eqpos[i + 1])
     measurement[i] <- grepl("=~", tmp)
     covariance[i] <- grepl("~~", tmp)
@@ -66,9 +83,7 @@ pathmodelfit <- function(lavaanoutput) {
 
   fit1 <- sem(modsat, sample.cov = vcdata, sample.nobs = N)
 
-  # compute RMSEA-P
-
-
+  # Compute RMSEA-P
   X2ss <- fit1@test[[1]]$stat
   dfss <- fit1@test[[1]]$df
 
@@ -102,14 +117,14 @@ pathmodelfit <- function(lavaanoutput) {
   L2 <- sqrt(AA2 / (H2 * B2 - 1))
   M2 <- sqrt(AB2 / (H2 * B2 - 1))
 
-  # compute NSCI-P
+  # Compute NSCI-P
   X2sn <- fit0@test[[1]]$stat
   dfsn <- fit0@test[[1]]$df
   NSCIP <- ((X2sn - X2t) - (dfsn - dft)) / ((X2sn - X2ss) - (dfsn - dfss))
   output <- c(RMSEAP, L2, M2, NSCIP)
   labs <- c("RMSEA-P", "RMSEA-P 90% lower bound", "RMSEA-P 90% upper bound", "NSCI-P")
 
-  # compute Hancock and Mueller
+  # Compute Hancock and Mueller
   impliedlvvcmatrix <- lavTech(fit1, what = "cov.lv")[[1]]
   latenteqs <- (fit1@ParTable$op == "=~")
   lvnames <- unique(fit1@ParTable$lhs[latenteqs])
@@ -121,8 +136,38 @@ pathmodelfit <- function(lavaanoutput) {
   Hancock <- fitMeasures(fitwithimplied, fit.measures = c("srmr", "rmsea", "tli", "cfi"))
   names(Hancock) <- paste0(names(Hancock), ".s")
 
+  # Bind results together
   Est <- c(output, Hancock)
+
+  # Create a pathmodelfit object
   foutput <- as.data.frame(Est)
   rownames(foutput) <- c(labs, names(Hancock))
-  print(foutput, digits = 4)
+  structure(foutput, class = c("pathmodelfit", "data.frame") )
+}
+
+#' @export
+#' @rdname pathmodelfit
+pathmodelfit.default <- function(x, ...) {
+  stop("`x` must be a 'lavaan' model output not '", class(x), "'.")
+}
+
+#' Print a `pathmodelfit` object
+#'
+#' Display a `pathmodelfit` object with fixed formatting.
+#'
+#' @param x   A `pathmodelfit` object.
+#' @inheritParams base::print.data.frame
+#' @param ... Additional parameters passed onto [print.data.frame()].
+#'
+#' @return
+#' Display results and invisibly return the `pathmodelfit` object if used in
+#' a pipe.
+#'
+#' @seealso
+#' [pathmodelfit()]
+#'
+#' @export
+print.pathmodelfit = function(x, digits = 4, ...){
+  NextMethod(x, digits = digits)
+  invisible(x)
 }
