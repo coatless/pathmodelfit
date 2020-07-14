@@ -32,3 +32,5 @@ Author: Steven Andrew Culpepper [aut, cre]
     (<https://orcid.org/0000-0003-4226-6176>),
   Larry Williams [aut]
 Maintainer: Steven Andrew Culpepper <sculpepp@illinois.edu>
+URL: https://github.com/coatless/pathmodelfit
+BugReports: https://github.com/coatless/pathmodelfit/issues
