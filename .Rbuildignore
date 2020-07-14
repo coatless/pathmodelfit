@@ -1,2 +1,4 @@
 ^pathmodelfit\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+^\.github$
